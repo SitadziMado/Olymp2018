@@ -2,6 +2,8 @@
 
 #include <sstream>
 
+#include <cctype>
+
 std::string trim(const std::string& string)
 {
 	std::string rv;
@@ -47,4 +49,12 @@ std::vector<std::string> tokenize(const std::string& string)
 	}
 
 	return rv;
+}
+
+void skipWhitespace(std::istream& stream)
+{
+	while (std::isspace(stream.peek()))
+	{
+		stream.ignore(1);
+	}
 }

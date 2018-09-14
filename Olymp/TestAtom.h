@@ -3,6 +3,9 @@
 #include <iosfwd>
 #include <memory>
 #include <stdexcept>
+#include <string>
+
+#include "Utility.h"
 
 class ITestable
 {
@@ -47,6 +50,19 @@ inline std::shared_ptr<ITestable> TestAtom<T>::fromStream(std::istream& stream)
 	stream >> temp;
 
 	ITestable* atom = new TestAtom<T>(temp);
+
+	return std::shared_ptr<ITestable>(atom);
+}
+
+template<>
+inline std::shared_ptr<ITestable> TestAtom<std::string>::fromStream(std::istream& stream)
+{
+	std::string temp;
+
+	skipWhitespace(stream);
+	std::getline(stream, temp);
+
+	ITestable* atom = new TestAtom<std::string>(temp);
 
 	return std::shared_ptr<ITestable>(atom);
 }

@@ -1,14 +1,6 @@
-4
+1
 begin
-	double 1.5
+	string 11:11
+	string 12:12
+	string 03:23
 end
-begin
-	double 10
-end
-
-begin
-double       12
-   end
-				    begin
-		double     123
-  end

@@ -1,7 +1,6 @@
 #include "TestAtom.h"
 
 #include <iostream>
-#include <string>
 #include <unordered_map>
 
 std::shared_ptr<ITestable> ITestable::fromStream(std::istream& stream)
@@ -18,6 +17,10 @@ std::shared_ptr<ITestable> ITestable::fromStream(std::istream& stream)
 	else if (typeSignature == "double")
 	{
 		rv = TestAtom<double>::fromStream(stream);
+	}
+	else if (typeSignature == "string")
+	{
+		rv = TestAtom<std::string>::fromStream(stream);
 	}
 	else
 	{

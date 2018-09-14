@@ -4,8 +4,6 @@
 #include <sstream>
 #include <string>
 
-#include <cctype>
-
 #include "Utility.h"
 
 std::shared_ptr<Test> Test::fromStream(std::istream& stream)
@@ -13,10 +11,7 @@ std::shared_ptr<Test> Test::fromStream(std::istream& stream)
 	ITestablePtrContainer atoms;
 	std::string line;
 
-	while (std::isspace(stream.peek()))
-	{
-		stream.ignore(1);
-	}
+	skipWhitespace(stream);
 
 	std::getline(stream, line);
 

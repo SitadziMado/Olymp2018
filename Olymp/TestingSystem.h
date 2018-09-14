@@ -51,7 +51,7 @@ inline void TestingSystem::test(
 			std::cerr << "Тест №" << t + 1 << ": ОК. ";
 		}
 
-		std::cerr << "Время: " << ms << "." << std::endl;
+		std::cerr << "Время: " << ms << " мс." << std::endl;
 	}
 
 	std::cin.rdbuf(cinBuffer);
