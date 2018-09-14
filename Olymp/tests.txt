@@ -1,4 +1,14 @@
-1
+4
 begin
 	double 1.5
 end
+begin
+	double 10
+end
+
+begin
+double       12
+   end
+				    begin
+		double     123
+  end

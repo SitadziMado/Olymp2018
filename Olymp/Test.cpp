@@ -4,6 +4,8 @@
 #include <sstream>
 #include <string>
 
+#include <cctype>
+
 #include "Utility.h"
 
 std::shared_ptr<Test> Test::fromStream(std::istream& stream)
@@ -11,7 +13,11 @@ std::shared_ptr<Test> Test::fromStream(std::istream& stream)
 	ITestablePtrContainer atoms;
 	std::string line;
 
-	stream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	while (std::isspace(stream.peek()))
+	{
+		stream.ignore(1);
+	}
+
 	std::getline(stream, line);
 
 	if (trim(line) == "begin")

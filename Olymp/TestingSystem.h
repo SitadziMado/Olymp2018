@@ -35,6 +35,7 @@ inline void TestingSystem::test(
 	size_t testCount;
 
 	testStream >> testCount;
+	// testStream.ignore();
 
 	for (size_t t = 0; t < testCount; ++t)
 	{
