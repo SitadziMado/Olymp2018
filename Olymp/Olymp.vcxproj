@@ -120,12 +120,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="TestAtom.cpp" />
     <ClCompile Include="TestingSystem.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="TestAtom.h" />
     <ClInclude Include="TestingSystem.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
+    <Text Include="tests.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
