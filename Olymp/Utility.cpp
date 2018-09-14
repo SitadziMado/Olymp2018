@@ -1,6 +1,8 @@
 #include "Utility.h"
 
+#include <locale>
 #include <sstream>
+#include <unordered_set>
 
 #include <cctype>
 
@@ -10,7 +12,7 @@ std::string trim(const std::string& string)
 
 	auto front = string.cbegin();
 
-	while (front != string.cend() && *front == ' ')
+	while (front != string.cend() && std::isspace(*front))
 	{
 		++front;
 	}
@@ -23,7 +25,7 @@ std::string trim(const std::string& string)
 	{
 		auto back = string.cend() - 1;
 
-		while (/*back != string.cbegin() &&*/ *back == ' ')
+		while (std::isspace(*back))
 		{
 			--back;
 		}
@@ -36,7 +38,30 @@ std::string trim(const std::string& string)
 	return rv;
 }
 
-std::vector<std::string> tokenize(const std::string& string)
+/*template<>
+std::vector<std::string> split(
+	const std::string& string,
+	const std::unordered_set<char>& delimeters
+)
+{
+	std::vector<std::string> rv;
+	std::stringstream ss{ string };
+
+	std::string temp;
+
+	while (ss >> temp)
+	{
+		rv.push_back(temp);
+	}
+
+	return rv;
+}*/
+
+template<template<typename> typename TDelimeterContainer>
+std::vector<std::string> split(
+	const std::string& string,
+	TDelimeterContainer<char>&& delimeters
+)
 {
 	std::vector<std::string> rv;
 	std::stringstream ss{ string };

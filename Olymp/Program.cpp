@@ -7,7 +7,9 @@
 
 #include <clocale>
 
+#ifdef HOME
 #include "TestingSystem.h"
+#endif // HOME
 
 using i64 = long long;
 using u64 = unsigned long long;
