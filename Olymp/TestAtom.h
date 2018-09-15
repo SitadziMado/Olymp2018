@@ -10,11 +10,13 @@
 class ITestable
 {
 public: 
-	virtual bool test(std::istream& programOutput) const = 0;
 	static std::shared_ptr<ITestable> fromStream(
 		std::istream& stream
 	);
 
+	virtual ~ITestable() = default;
+	virtual bool test(std::istream& programOutput) const = 0;
+	
 protected:
 	ITestable() = default;
 

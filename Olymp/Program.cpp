@@ -1,31 +1,39 @@
 #include <algorithm>
+#include <fstream>
+#include <functional>
 #include <iomanip>
 #include <iostream>
-#include <fstream>
+#include <map>
 #include <numeric>
 #include <set>
+#include <vector>
 
 #include <clocale>
 
+#ifdef HOME
 #include "TestingSystem.h"
+
+#define START_APP class App { public:
+#define END_APP };
+#endif // HOME
 
 using i64 = long long;
 using u64 = unsigned long long;
 
-void solve();
+class App;
 
 int main(int argc, char** argv)
 {
-	std::setlocale(LC_ALL, "ru-RU");
 	std::ios_base::sync_with_stdio(false);
 
 #ifdef HOME
+	std::setlocale(LC_ALL, "ru-RU");
+
 	auto ts = TestingSystem();
 
-	ts.test(
-		solve,
-		std::ifstream("input.txt"), 
-		std::ifstream("tests.txt")
+	ts.test<App>(
+		(std::istream&)std::ifstream("input.txt"),
+		(std::istream&)std::ifstream("tests.txt")
 	);
 #else
 	solve();
@@ -36,51 +44,19 @@ int main(int argc, char** argv)
 
 using namespace std;
 
-struct Point
-{
-	i64 x;
-	i64 y;
-	size_t id;
-};
+START_APP
+
+
 
 void solve()
 {
-	size_t t;
 
-	cin >> t;
-
-	for (size_t i = 0; i < t; i++)
-	{
-		i64 hrs, mins;
-		cin >> hrs >> mins;
-
-		char u, t, c;
-		double offset;
-
-		cin >> u >> t >> c >> offset;
-		offset -= 8.;
-
-		i64 offsetMins = (i64)(round(offset * 60.));
-
-		mins += hrs * 60;
-
-		mins += offsetMins;
-
-		mins = (mins + 1440) % 1440;
-		hrs = mins / 60;
-		mins %= 60;
-
-		cout << setw(2) << setfill('0');
-
-		cout << hrs << ":" << mins << endl;
-
-		// printf("%02lld:%02lld\n", hrs, mins);
-		// cout << hrs << ":" << mins << endl;
-	}
-
-	for (size_t i = 0; i < 10000000; i++)
-	{
-		int a = 0, b = 1;
-		swap(a, b);
-	}
 }
+
+
+
+END_APP
+
+
+
+

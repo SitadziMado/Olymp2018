@@ -6,25 +6,25 @@
 
 #include "Test.h"
 #include "Timer.h"
+#include "Utility.h"
 
 class TestingSystem
 {
 public:
-	template<typename TCallable, typename TInputStream, typename TTestStream>
-	void test(TCallable&& func, TInputStream&& istream, TTestStream&& testStream);
+	template<class TApp>
+	void test(
+		std::istream& istream, 
+		std::istream& testStream
+	);
 
-	TestingSystem();
+	TestingSystem() = default;
 
 private:
 	Timer timer_;
 };
 
-template<typename TCallable, typename TInputStream, typename TTestStream>
-inline void TestingSystem::test(
-	TCallable&& func,
-	TInputStream&& istream, 
-	TTestStream&& testStream
-)
+template<class TApp>
+inline void TestingSystem::test(std::istream& istream, std::istream & testStream)
 {
 	auto ss = std::stringstream();
 
@@ -35,16 +35,21 @@ inline void TestingSystem::test(
 	size_t testCount;
 
 	testStream >> testCount;
-	// testStream.ignore();
 
 	for (size_t t = 0; t < testCount; ++t)
 	{
+		auto app = TApp();
 		auto test = Test::fromStream(testStream);
-		auto ms = timer_.measureMilliseconds(func).count();
-		
+
+		// Измерим время выполнения кода.
+		auto ms = timer_.measureMilliseconds(
+			[&app]() { app.solve();  }
+		).count();
+
 		if (!test->test(ss))
 		{
-			std::cerr << "Неправильный ответ на тесте №" << t + 1 << ". ";
+			std::cerr << "Неправильный ответ на тесте №" << t + 1 << ". " << std::endl;
+			// std::cerr << "\t" << R"(Ожидалось: ")" <<  << R"(";)";
 		}
 		else
 		{
@@ -52,6 +57,8 @@ inline void TestingSystem::test(
 		}
 
 		std::cerr << "Время: " << ms << " мс." << std::endl;
+
+		skipWhitespace(istream);
 	}
 
 	std::cin.rdbuf(cinBuffer);

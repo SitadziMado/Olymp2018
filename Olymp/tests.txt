@@ -1,6 +1,4 @@
 1
 begin
-	string 11:11
-	string 12:12
-	string 03:23
+	string 67
 end
