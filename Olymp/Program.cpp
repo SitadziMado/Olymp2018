@@ -12,6 +12,7 @@
 
 #ifdef HOME
 #include "TestingSystem.h"
+#endif // HOME
 
 #define START_APP class App { public:
 #define END_APP };
