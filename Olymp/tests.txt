@@ -5,3 +5,12 @@ end
 begin
 	double 123.123
 end
+
+{
+	precision: 6,
+	tests: [
+		[ '123', '123.456', '123.43' ],
+		[ '54', '65.456', '1.0' ],
+		[ 'length', 'nobu' ]
+	]
+}

@@ -62,25 +62,6 @@ std::vector<std::string> split(
 	return rv;
 }*/
 
-template<template<typename> typename TDelimeterContainer>
-std::vector<std::string> split(
-	const std::string& string,
-	TDelimeterContainer<char>&& delimeters
-)
-{
-	std::vector<std::string> rv;
-	std::stringstream ss{ string };
-
-	std::string temp;
-
-	while (ss >> temp)
-	{
-		rv.push_back(temp);
-	}
-
-	return rv;
-}
-
 void skipWhitespace(std::istream& stream)
 {
 	while (std::isspace(stream.peek()))
