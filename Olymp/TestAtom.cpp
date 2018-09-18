@@ -31,3 +31,25 @@ std::shared_ptr<ITestable> ITestable::fromStream(std::istream& stream)
 
 	return rv;
 }
+
+ITestable::TestingResults::TestingResults(bool correct, std::string&& string) :
+	correct_(correct),
+	programOutput_(string)
+{}
+
+ITestable::TestingResults::operator bool() const
+{
+	return correct_;
+}
+
+ITestable::TestingResults::operator const std::string&() const
+{
+	return programOutput_;
+}
+
+ITestable::TestingResults& ITestable::TestingResults::merge(const TestingResults& rhs)
+{
+	correct_ &= rhs.correct_;
+	programOutput_ += (programOutput_.empty() ? "" : "\n") + rhs.programOutput_;
+	return *this;
+}

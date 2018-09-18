@@ -1,4 +1,7 @@
-1
+2
 begin
-	string 67
+	string 123
+end
+begin
+	double 123.123
 end

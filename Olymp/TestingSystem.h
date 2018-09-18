@@ -26,6 +26,8 @@ private:
 template<class TApp>
 inline void TestingSystem::test(std::istream& istream, std::istream & testStream)
 {
+	using std::endl;
+
 	auto ss = std::stringstream();
 
 	// Подменяем буферы.
@@ -46,17 +48,24 @@ inline void TestingSystem::test(std::istream& istream, std::istream & testStream
 			[&app]() { app.solve();  }
 		).count();
 
-		if (!test->test(ss))
+		auto tr = test->test(ss);
+
+		if (!tr)
 		{
-			std::cerr << "Неправильный ответ на тесте №" << t + 1 << ". " << std::endl;
-			// std::cerr << "\t" << R"(Ожидалось: ")" <<  << R"(";)";
+			std::cerr << "Неправильный ответ на тесте №" << t + 1 << ". " << endl;
+
+			std::cerr /*<< "\t"*/ << R"(Ожидалось: )" << endl << "\"";
+			std::cerr << test->getExpectedString() << "\"" << endl;
+
+			std::cerr << R"(Получено: )" << endl << "\"";
+			std::cerr << (std::string)tr << "\"" << endl;
 		}
 		else
 		{
 			std::cerr << "Тест №" << t + 1 << ": ОК. ";
 		}
 
-		std::cerr << "Время: " << ms << " мс." << std::endl;
+		std::cerr << "Время: " << ms << " мс." << std::endl << std::endl;
 
 		skipWhitespace(istream);
 	}

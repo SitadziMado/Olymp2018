@@ -12,7 +12,8 @@ public:
 	static std::shared_ptr<Test> fromStream(std::istream& stream);
 
 	Test() = default;
-	bool test(std::istream& programOutput) const;
+	ITestable::TestingResults test(std::istream& programOutput) const;
+	std::string getExpectedString() const;
 
 private:
 	using ITestablePtr = std::shared_ptr<ITestable>;

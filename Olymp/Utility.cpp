@@ -38,6 +38,11 @@ std::string trim(const std::string& string)
 	return rv;
 }
 
+std::string& to_string(std::string& string)
+{
+	return string;
+}
+
 /*template<>
 std::vector<std::string> split(
 	const std::string& string,

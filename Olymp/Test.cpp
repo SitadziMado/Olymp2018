@@ -3,6 +3,7 @@
 #include <limits>
 #include <sstream>
 #include <string>
+#include <utility>
 
 #include "Utility.h"
 
@@ -29,17 +30,36 @@ std::shared_ptr<Test> Test::fromStream(std::istream& stream)
 	return std::unique_ptr<Test>(entity);
 }
 
-bool Test::test(std::istream& programOutput) const
+ITestable::TestingResults Test::test(std::istream& programOutput) const
 {
-	bool rv = true;
+	ITestable::TestingResults tr{ true, "" };
 
 	for (auto&& a : atoms_)
 	{
-		if (!a->test(programOutput))
+		auto nextTr = a->test(programOutput);
+
+		if (!tr.merge(nextTr))
 		{
-			rv = false;
 			break;
 		}
+	}
+
+	return tr;
+}
+
+std::string Test::getExpectedString() const
+{
+	std::string rv;
+	rv.reserve(16 * atoms_.size());
+
+	for (auto&& a : atoms_)
+	{
+		rv += /*"\t" +*/ a->toString() + "\n";
+	}
+
+	if (atoms_.size())
+	{
+		rv.pop_back();
 	}
 
 	return rv;

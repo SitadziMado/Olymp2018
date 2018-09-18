@@ -10,12 +10,27 @@
 class ITestable
 {
 public: 
+	struct TestingResults
+	{
+		TestingResults(bool correct, std::string&& string);
+
+		operator bool() const;
+		explicit operator const std::string&() const;
+
+		TestingResults& merge(const TestingResults& rhs);
+
+	private:
+		bool correct_;
+		std::string programOutput_;
+	};
+
 	static std::shared_ptr<ITestable> fromStream(
 		std::istream& stream
 	);
 
 	virtual ~ITestable() = default;
-	virtual bool test(std::istream& programOutput) const = 0;
+	virtual TestingResults test(std::istream& programOutput) const = 0;
+	virtual std::string toString() const = 0;
 	
 protected:
 	ITestable() = default;
@@ -31,18 +46,40 @@ public:
 
 	TestAtom() = default;
 	TestAtom(T value);
-	virtual bool test(std::istream& programOutput) const override final;
+	TestingResults test(std::istream& programOutput) const override final;
+	std::string toString() const override;
 
 private:
 	T value_;
 };
 
 template<typename T>
-inline bool TestAtom<T>::test(std::istream& programOutput) const
+inline ITestable::TestingResults TestAtom<T>::test(std::istream& programOutput) const
 {
 	T value;
 	programOutput >> value;
-	return value_ == value;
+	return ITestable::TestingResults(value_ == value, std::to_string(value));
+}
+
+template<>
+inline ITestable::TestingResults TestAtom<std::string>::test(std::istream& programOutput) const
+{
+	std::string value;
+	skipWhitespace(programOutput);
+	std::getline(programOutput, value);
+	return ITestable::TestingResults(value_ == value, std::move(value));
+}
+
+template<typename T>
+inline std::string TestAtom<T>::toString() const
+{
+	return std::to_string(value_);
+}
+
+template<>
+inline std::string TestAtom<std::string>::toString() const
+{
+	return value_;
 }
 
 template<typename T>
