@@ -18,6 +18,7 @@ public:
 		explicit operator const std::string&() const;
 
 		TestingResults& merge(const TestingResults& rhs);
+		TestingResults& append(const std::string& desc);
 
 	private:
 		bool correct_;

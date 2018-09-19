@@ -40,9 +40,11 @@ ITestable::TestingResults Test::test(std::istream& programOutput) const
 
 		if (!tr.merge(nextTr))
 		{
-			break;
+			// break;
 		}
 	}
+
+	tr.append(readAll(programOutput));
 
 	return tr;
 }

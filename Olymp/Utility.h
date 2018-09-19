@@ -7,7 +7,7 @@
 
 std::string trim(const std::string& string);
 void skipWhitespace(std::istream& stream);
-
+std::string readAll(std::istream& stream);
 
 template<template<typename> typename TDelimeterContainer>
 inline std::vector<std::string> split(

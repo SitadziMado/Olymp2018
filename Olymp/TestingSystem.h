@@ -47,7 +47,7 @@ inline void TestingSystem::test(std::istream& istream, std::istream & testStream
 		auto ms = timer_.measureMilliseconds(
 			[&app]() { app.solve();  }
 		).count();
-
+		
 		auto tr = test->test(ss);
 
 		if (!tr)

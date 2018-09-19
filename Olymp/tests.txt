@@ -1,16 +1,29 @@
-2
+5
 begin
-	string 123
-end
-begin
-	double 123.123
+	string 0
+	string 0
 end
 
-{
-	precision: 6,
-	tests: [
-		[ '123', '123.456', '123.43' ],
-		[ '54', '65.456', '1.0' ],
-		[ 'length', 'nobu' ]
-	]
-}
+begin
+	string 1
+	string 1
+	string 1 2
+end
+
+begin
+	string 4
+	string 2
+	string 3 4
+	string 1 2
+end
+
+begin
+	string 0
+	string 0
+end
+
+begin
+	string 1
+	string 1
+	string 1 1
+end

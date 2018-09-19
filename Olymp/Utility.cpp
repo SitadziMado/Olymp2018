@@ -69,3 +69,10 @@ void skipWhitespace(std::istream& stream)
 		stream.ignore(1);
 	}
 }
+
+std::string readAll(std::istream& stream)
+{
+	std::stringstream ss;
+	ss.set_rdbuf(stream.rdbuf());
+	return ss.str();
+}

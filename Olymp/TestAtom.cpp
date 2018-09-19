@@ -50,6 +50,12 @@ ITestable::TestingResults::operator const std::string&() const
 ITestable::TestingResults& ITestable::TestingResults::merge(const TestingResults& rhs)
 {
 	correct_ &= rhs.correct_;
-	programOutput_ += (programOutput_.empty() ? "" : "\n") + rhs.programOutput_;
+	append(rhs.programOutput_);
+	return *this;
+}
+
+ITestable::TestingResults& ITestable::TestingResults::append(const std::string& desc)
+{
+	programOutput_ += (programOutput_.empty() ? "" : "\n") + desc;
 	return *this;
 }
