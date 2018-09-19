@@ -1,16 +1,20 @@
 #pragma once
 
 #include <iosfwd>
+#include <memory>
 #include <sstream>
 #include <string>
+#include <type_traits>
 #include <vector>
+
+template<typename T>
+using Ptr = std::shared_ptr<T>;
 
 std::string trim(const std::string& string);
 void skipWhitespace(std::istream& stream);
 
-
-template<template<typename> typename TDelimeterContainer>
-inline std::vector<std::string> split(
+template<template<typename> class TDelimeterContainer>
+std::vector<std::string> split(
 	const std::string& string,
 	TDelimeterContainer<char>&& delimeters
 )
@@ -29,7 +33,7 @@ inline std::vector<std::string> split(
 }
 
 template<typename T>
-inline std::string show(T&& value)
+std::string show(T&& value)
 {
 	std::stringstream ss;
 	ss << value;
@@ -46,4 +50,18 @@ inline std::string show(T&& value)
 	rv += "\"";
 
 	return rv;
+}
+
+template<typename T, typename... TArgs>
+Ptr<T> alloc(TArgs&&... args)
+{
+    return std::make_shared<T>(std::forward<TArgs>(args)...);
+}
+
+template<typename T>
+std::string show(T value)
+{
+    std::stringstream ss;
+    ss << value;
+    return ss.str();
 }

@@ -121,19 +121,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Float.cpp" />
+    <ClCompile Include="Integer.cpp" />
+    <ClCompile Include="JsonParser.cpp" />
+    <ClCompile Include="List.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="String.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="TestAtom.cpp" />
     <ClCompile Include="TestingSystem.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Float.h" />
+    <ClInclude Include="Integer.h" />
+    <ClInclude Include="JsonParser.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="String.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="TestAtom.h" />
     <ClInclude Include="TestingSystem.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
